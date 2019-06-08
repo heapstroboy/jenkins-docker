@@ -75,18 +75,6 @@ COPY jenkins.sh /usr/local/bin/jenkins.sh
 COPY tini-shim.sh /bin/tini
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
-# Copy the file that will install the plugins
-COPY install-plugins.sh /usr/local/bin/install-plugins.sh
-RUN /usr/local/bin/install-plugins.sh \
-dashboard-view:2.9.10 \
-pipeline-stage-view:2.4 \
-parameterized-trigger:2.32 \
-git:3.0.5 \
-github:1.26.0`
-
-
-
-
 # add the admin user
 COPY /configs/users "$JENKINS_HOME"/users/
 COPY /configs/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
